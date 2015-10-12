@@ -6,27 +6,6 @@ base = int(raw_input('Escribe 1 si deseas convertir un numero en base 10 a base 
 
 if base == 1:
 
-	# CASO PAR
-	# ========
-	# 12 # Se elige un valor a convertir
-
-	# 12/2 = 6		0 # Se guarda el reciduo de la division
-	# 6/2 = 3		0
-	# 3/2 = 1 		1
-	# 1 			1
-
-	# 1100 # Se invierten los digitos del numero generado
-
-	# CASO IMPAR
-	# ========
-	# 13 # Se elige un valor a convertir
-
-	# 13/2 = 6		1 # Se guarda el reciduo de la division
-	# 6/2 = 3		0
-	# 3/2 = 1 		1
-	# 1 			1
-
-	# 1100 # Se invierten los digitos del numero generado
 	num10 = int(raw_input('Ingrese un numero entero positivo en base 10: '))
 	num = num10
 
@@ -60,11 +39,3 @@ elif base == 2:
 else:
 
 	print "Base invalida"
-
-
-# 1100
-# 1 1 0 0
-# 0 0 1 1
-# 1 2 4 8 
-
-# vec_base2 = (2^0, 2^1, )
