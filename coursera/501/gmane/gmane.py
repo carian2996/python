@@ -8,6 +8,8 @@ from urlparse import urlparse
 import re
 from datetime import datetime, timedelta
 
+# ========== Timestamps configuration ==========
+
 # Not all systems have this so conditionally define parser
 try:
     import dateutil.parser as parser
@@ -58,6 +60,8 @@ def parsemaildate(md) :
 
     return iso+tz
 
+# ========== Where should I start? ==========
+
 conn = sqlite3.connect('content.sqlite')
 cur = conn.cursor()
 conn.text_factory = str
@@ -69,7 +73,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Messages
      subject TEXT, headers TEXT, body TEXT)''')
 
 start = 0
-cur.execute('SELECT max(id) FROM Messages')
+cur.execute('SELECT max(id) FROM Messages') # Select the highest id retrieved so far
 try:
     row = cur.fetchone()
     if row[0] is not None: 
@@ -80,18 +84,22 @@ except:
 
 print start
 
+# ========== Retrieving messages ==========
+
 many = 0
 
 # Skip up to five messages
-skip = 5
+skip = 5 # Some gaps in the messages. 
 while True:
     if ( many < 1 ) :
         sval = raw_input('How many messages:')
-        if ( len(sval) < 1 ) : break
+        if ( len(sval) < 1 ) : 
+            print 'Select a valid number'
+            break
         many = int(sval)
 
     start = start + 1
-    cur.execute('SELECT id FROM Messages WHERE id=?', (start,) )
+    cur.execute('SELECT id FROM Messages WHERE id=?', (start,) ) 
     try:
         row = cur.fetchone()
         if row is not None : continue
@@ -99,8 +107,9 @@ while True:
         row = None
         
     many = many - 1
-    url = baseurl + str(start) + '/' + str(start + 1)
+    url = baseurl + str(start) + '/' + str(start + 1) # Construct the URL
 
+    # ========== Read the documents ==========
     try:
         # Deal with SSL certificate anomalies Python > 2.7
 	    # scontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
@@ -132,6 +141,7 @@ while True:
         skip = skip-1
         continue
 
+    # ========== Divide the messages into header and body ==========
     pos = text.find("\n\n")
     if pos > 0 : 
         hdr = text[:pos]
@@ -143,6 +153,7 @@ while True:
 
     skip = 5 # reset skip count
 
+    # ========== Sender of the message ==========
     email = None
     x = re.findall('\nFrom: .* <(\S+@\S+)>\n', hdr)
     if len(x) == 1 : 
@@ -156,6 +167,7 @@ while True:
             email = email.strip().lower()
             email = email.replace("<","")
 
+    # ========== Date of the message ==========
     date = None
     y = re.findall('\Date: .*, (.*)\n', hdr)
     if len(y) == 1 : 
@@ -168,15 +180,18 @@ while True:
             print "Parse fail",tdate
             break
 
+    # ========== Subject of the message ==========
     subject = None
     z = re.findall('\Subject: (.*)\n', hdr)
     if len(z) == 1 : subject = z[0].strip().lower();
+
+    # ========== Write the data into tables ==========
 
     # print "   ",email,sent_at,subject
     cur.execute('''INSERT OR IGNORE INTO Messages (id, email, sent_at, subject, headers, body) 
         VALUES ( ?, ?, ?, ?, ?, ? )''', ( start, email, sent_at, subject, hdr, body))
 
-    # Only commit every 1000th record
+    # Only commit every 250th record
     if (many % 250) == 0 : 
         conn.commit() 
         print "Commit done!"

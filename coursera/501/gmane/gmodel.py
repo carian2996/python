@@ -13,7 +13,7 @@ except:
 dnsmapping = dict()
 mapping = dict()
 
-def fixsender(sender,allsenders=None) :
+def fixsender(sender,allsenders=None):
     global dnsmapping
     global mapping
     if sender is None : return None
@@ -53,7 +53,7 @@ def fixsender(sender,allsenders=None) :
     dns = dnsmapping.get(dns,dns)
     return mpieces[0] + '@' + dns
 
-def parsemaildate(md) :
+def parsemaildate(md):
     # See if we have dateutil
     try:
         pdate = parser.parse(tdate)
