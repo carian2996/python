@@ -25,12 +25,6 @@ def MaxPairwiseProduct(n, v):
 	
 	print(result)
 
-# Example: 4, [2, 1, 4, 1]
-# result = 0
-# 2 * 1 = 2 > 4 ? => FALSE
-# 2 * 4 = 8 > 4 ? => TRUE => result = 8
-# 2 * 1 = 2 > 8 ? => FALSE
-# ...
 
 def MaxPairwiseProductFast(n, v):
 	
@@ -49,8 +43,9 @@ def MaxPairwiseProductFast(n, v):
 	print(v[max1_i] * v[max2_j])
 
 
+# Maximum pairwise product
 n = int(input())
 v = [int(x) for x in input().split()]
 
-# MaxPairwiseProduct(n, v)
+MaxPairwiseProduct(n, v)
 MaxPairwiseProductFast(n, v)
