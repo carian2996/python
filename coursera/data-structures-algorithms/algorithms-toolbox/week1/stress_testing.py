@@ -1,5 +1,5 @@
 from random import randint
-from random import randrange
+from random import seed
 
 def MaxPairwiseProduct(n, v):
 	assert(len(v) == n) 						# Is the length of the vector equal to n?
@@ -24,7 +24,7 @@ def MaxPairwiseProductFast(n, v):
 
 	max2_j = -1
 	for j in range(0, n):
-  		if v[j] != v[max1_i] and (max2_j == -1 or v[j] > v[max2_j]):
+  		if j != max1_i and (max2_j == -1 or v[j] > v[max2_j]):
   			max2_j = j
 
 	return v[max1_i] * v[max2_j]
@@ -38,7 +38,13 @@ print("Choose a range to generate the elements of the array: ")
 v_min = int(input())
 v_max = int(input())
 
+print("Choose an integer for the seed: ")
+s = int(input())
+
+seed(s)
+
 while True:
+
 	n = randint(n_min, n_max)
 	print(n)
 
