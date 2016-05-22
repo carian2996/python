@@ -12,40 +12,38 @@
 # by the rest of the number. Compares with the variable 'result' and
 # saves it if the multiplication is greater than 'result'.
 
-def MaxPairwiseProduct(n, v):
-	
-	assert(len(v) == n) 						# Is the length of the vector equal to n?
+def MaxPairwiseProduct(n, a):
+	assert(len(a) == n), "n should be equal to the length of the array"
 
 	result = 0
 
 	for i in range(0, n):
 	    for j in range(i+1, n):
-	        if v[i]*v[j] > result:
-	            result = v[i]*v[j]
+	        if a[i]*a[j] > result:
+	            result = a[i]*a[j]
 	
 	print(result)
 
 
-def MaxPairwiseProductFast(n, v):
-	
-	assert(len(v) == n)
+def MaxPairwiseProductFast(n, a):
+	assert(len(a) == n), "n should be equal to the length of the array"
 	
 	max1_i = -1
 	for i in range(0, n):
-  		if max1_i == -1 or v[i] > v[max1_i]:
+  		if max1_i == -1 or a[i] > a[max1_i]:
   			max1_i = i
 
 	max2_j = -1
 	for j in range(0, n):
-  		if v[j] != v[max1_i] and (max2_j == -1 or v[j] > v[max2_j]):
+  		if j != max1_i and (max2_j == -1 or a[j] > a[max2_j]):
   			max2_j = j
 
-	print(v[max1_i] * v[max2_j])
+	print(a[max1_i] * a[max2_j])
 
 
 # Maximum pairwise product
 n = int(input())
-v = [int(x) for x in input().split()]
+a = [int(x) for x in input().split()]
 
-MaxPairwiseProduct(n, v)
-MaxPairwiseProductFast(n, v)
+# MaxPairwiseProduct(n, a)
+MaxPairwiseProductFast(n, a)
