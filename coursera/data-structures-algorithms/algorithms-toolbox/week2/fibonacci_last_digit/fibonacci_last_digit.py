@@ -1,11 +1,18 @@
-# Uses python3
-import sys
+# python3
 
 def get_fibonacci_last_digit(n):
-    # write your code here
-    return 0
+    assert(0 <= n <= 10000000), "n should be between 0 and 45"
 
-if __name__ == '__main__':
-    input = sys.stdin.read()
-    n = int(input)
-    print(get_fibonacci_last_digit(n))
+    F = []
+    F.append(0)
+    F.append(1)
+
+    for i in range(2, n + 1):
+    	F.append((F[i - 1] + F[i - 2]) % 10)
+
+    return F[n]
+
+
+n = int(input())
+print(get_fibonacci_last_digit(n))
+
