@@ -1,4 +1,4 @@
-# Uses python3
+# python3
 import sys
 
 def gcd(a, b):
@@ -10,7 +10,16 @@ def gcd(a, b):
 
     return current_gcd
 
+def fast_gcd(a, b):
+	if b == 0: return a
+	rem_a = a % b
+
+	return fast_gcd(b, rem_a)
+
 if __name__ == "__main__":
-    input = sys.stdin.read()
-    a, b = map(int, input.split())
-    print(gcd(a, b))
+    a, b = map(int, input().split())
+    assert(1 <= a and 1 <= b), "The number should be greater than 1"
+    assert(a <= 2000000000 and b <= 2000000000), "The number should be less than 2x10^9"
+
+    print(fast_gcd(a, b))
+    # print(gcd(a, b))

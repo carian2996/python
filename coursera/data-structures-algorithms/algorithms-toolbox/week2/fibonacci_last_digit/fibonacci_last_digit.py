@@ -13,6 +13,7 @@ def get_fibonacci_last_digit(n):
     return F[n]
 
 
-n = int(input())
-print(get_fibonacci_last_digit(n))
+if __name__ == "__main__":
+	n = int(input())
+	print(get_fibonacci_last_digit(n))
 

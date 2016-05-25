@@ -18,5 +18,6 @@ def fast_fibonacci(n):
 
 	return F[n]
 
-n = int(input())
-print(fast_fibonacci(n))
+if __name__ == "__main__":
+	n = int(input())
+	print(fast_fibonacci(n))
