@@ -1,6 +1,20 @@
 # python3
 
-def get_fibonacci_last_digit(n):
+# Ian Castillo Rosales
+# 05/26/2016
+
+# Problem Introduction: The Fibonacci numbers are defined as follows: 
+#	F0 = 0, F1 = 1, and Fi = Fi−1 + Fi−2 for i ≥ 2.
+
+# Task. Given an integer n, find the last digit of the nth Fibonacci number Fn (that is, Fn mod 10). 
+# Input Format: The input consists of a single integer n.
+# Constraints: 0 ≤ n ≤ 10^7.
+# Output Format: Output the last digit of Fn.
+
+# Time Limits: 5 sec.
+# Memory Limit: 512Mb.
+
+def fibonacci_last_digit(n):
     assert(0 <= n <= 10000000), "n should be between 0 and 45"
 
     F = []
@@ -15,5 +29,5 @@ def get_fibonacci_last_digit(n):
 
 if __name__ == "__main__":
 	n = int(input())
-	print(get_fibonacci_last_digit(n))
+	print(fibonacci_last_digit(n))
 

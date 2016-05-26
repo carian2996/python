@@ -1,12 +1,20 @@
 # python3
 
-# def fibonacci(n):
-# 	if n <= 1:
-# 		return n
+# Ian Castillo Rosales
+# 05/26/2016
 
-# 	return fibonacci(n - 1) + fibonacci(n - 2)
+# Problem Introduction: The Fibonacci numbers are defined as follows: 
+#	F0 = 0, F1 = 1, and Fi = Fi−1 + Fi−2 for i ≥ 2.
 
-def fast_fibonacci(n):
+# Task: Given an integer n, find the nth Fibonacci number Fn. 
+# Input: The input consists of a single integer n. 
+# Constraints: 0 ≤ n ≤ 45.
+# Output: Fn.
+
+# Time Limits: 5 sec.
+# Memory Limit: 512Mb.
+
+def fibonacci(n):
 	assert(0 <= n <= 45), "n should be between 0 and 45"
 
 	F = []
@@ -20,4 +28,4 @@ def fast_fibonacci(n):
 
 if __name__ == "__main__":
 	n = int(input())
-	print(fast_fibonacci(n))
+	print(fibonacci(n))
