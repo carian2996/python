@@ -21,7 +21,6 @@
 # Memory Limit: 512Mb.
 
 import sys
-# from time import sleep
 
 def get_optimal_value(capacity, weights, values):
 
@@ -35,18 +34,9 @@ def get_optimal_value(capacity, weights, values):
 	# list(zipped)
 	# [(1, 4), (2, 5), (3, 6)]
 
-
 	for i in range(0, n):
 
-		# print('i:', i)
-		# print('value:', value)
-		# print('capacity:', capacity)
-		# print('weights:', weights)
-		# print('values:', values)
-		# print('value_per_unit:', value_per_unit, '\n')
-
-		if capacity == 0: 
-			return value
+		if capacity == 0: return value
 		
 		index_max = value_per_unit.index(max(value_per_unit))
 
@@ -59,10 +49,7 @@ def get_optimal_value(capacity, weights, values):
 			weights[index_max] -= piece
 			capacity -= piece
 
-		# sleep(2)
-
 	return value
-
 
 if __name__ == "__main__":
 
